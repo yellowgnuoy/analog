@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아날로그인디락밴드</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+        @font-face {
+            font-family: 'KOTRA_BOLD-Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            width: 1920px;
+            margin: 0;
+            background-color: black;
+            overflow-x: hidden;
+        }
+
+        main {
+            height: 6500px;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            background: black;
+            height: 120px;
+            position: fixed;
+            top: 0;
+            transition: top 0.2s ease-in-out;
+            width: 100%;
+            z-index: 1;
+            opacity: 70%;
+        }
+
+        header nav li {
+            display: inline;
+        }
+
+        header nav li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header nav li.menu {
+            margin-right: 40px;
+        }
+
+        ul {
+            font-size: 19px;
+            margin-top: 48px;
+            margin-left: 880px;
+            display: flex;
+            font-family: 'Pretendard';
+            list-style-type: none;
+            justify-content: center;
+        }
+        header nav li a:hover {
+            color: rgb(113, 113, 113);
+        }
+
+        h2 {
+            font-family: 'KOTRA_BOLD-Bold';
+            margin-top: 38px;
+            margin-left: 60px;
+            color: rgb(78, 175, 255);
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .nav-up {
+            top: -80px;
+        }
+
+        .analog {
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+        }
+        div {
+            width: 100%;
+            position: relative;
+        }
+
+        .image1 {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: url(./img/sky.jpg) no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image2 {
+            width: 100%;
+            height: 300px;
+            background: url(./img/sky.jpg) no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cursor {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            opacity: 50%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        #wrapper{
+            position:relative;
+            overflow:hidden;
+            width:100%;height:60vh;
+            background:#000;
+        }
+        
+        .cont{
+            background-image: url(./img/bg.png);
+            /* position:absolute; overflow:hidden; */
+            width:100%;height:100vh;
+            left:0;}
+        
+        #cont_1{
+            display:flex;flex-wrap:wrap;
+            justify-content:center;align-items:center;
+            top:0;}
+        
+        *{margin:0;padding:0;box-sizing:border-box;}
+        li{list-style:none;}
+
+        #cont_2{
+            top:0%;
+            /* top:100%; */
+            transition:top 1s;}
+        
+        #slider {
+            display: flex;
+            align-items: flex-start; /* 요소들을 상단으로 정렬 */
+            position: absolute;
+            top: calc(50% - 210px); /* 중앙 정렬에서 높이의 절반만큼 위로 이동 */
+            left: 10vw;
+            transition: transform 0.3s;
+        }
+        
+        #slider li div{
+            position:relative;z-index:5;
+            width:calc(100% - 4rem);height:calc(100% - 4rem);
+        }
+        
+        
+        #slider li {
+            /* border: red 2px solid; */
+            top: 0;
+            flex: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* overflow: hidden; */
+            aspect-ratio: 1/1;
+            margin: 0 200px 0 0;
+            transition: transform 0.2s;
+        }
+
+        .voice {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-image: url(./img/voice.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+        }
+        .guiter {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-image: url(./img/guiter.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+        }
+        .drum {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/drum.png);
+        }
+        .Base {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/Base.png);
+        }
+        .voicetext {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/voicetext.png);
+        }
+        .guitertext {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/guitertext.png);
+        }
+        .drumtext {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/drumtext.png);
+        }
+        .Basetext {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/Basetext.png);
+        }
+        .object {
+            height: 350px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: all 0.8s;
+            background-image: url(./img/OBJECTS.png);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        li{list-style:none;}
+
+        .main2 {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(./img/main.png);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        #header-front {
+            top: 26vw;
+            left: calc(48% - 67vw / 2);
+            width: 70vw;
+            position: absolute;
+            z-index: 3;
+            height: auto;
+        }
+        .outer-container {
+            max-width: 1500px;
+            margin: auto;
+            width: 90%;
+            padding: 200px 0px;
+            position: relative;
+        }
+
+        .image-container {
+            padding-bottom:(1/1) * 100%;
+            background: black;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title2 {
+            margin: 0;
+            font-size: 60px;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 90%;
+            left: -450%;
+            /* transform: translateY(-50%); */
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        span {
+            position: relative;
+            display: block;
+        }
+        h3{
+            font-family: Pretendard;
+            color:white;
+        }
+        .contentWrap .album {
+        position: absolute;
+        top:380%;
+        transform: translate(-100%, -50%);
+        width: 600px;
+        height: 400px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        }
+        .contentWrap .album2 {
+        position: absolute;
+        top:430%;
+        transform: translate(0%, -50%);
+        width: 600px;
+        height: 400px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        }
+        .contentWrap .album3 {
+        position: absolute;
+        top:480%;
+        transform: translate(-100%, -50%);
+        width: 600px;
+        height: 400px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        }
+        .contentWrap .album4 {
+        position: absolute;
+        top:530%;
+        transform: translate(0%, -50%);
+        width: 600px;
+        height: 400px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        }
+        .contentWrap .album5 {
+        position: absolute;
+        top:580%;
+        transform: translate(-100%, -50%);
+        width: 600px;
+        height: 400px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        }
+
+        .contentWrap .album.active,.contentWrap .album2.active,.contentWrap .album3.active,.contentWrap .album4.active,.contentWrap .album5.active {
+        visibility: visible;
+        opacity: 1;
+        left: 50%;
+        }
+
+        .contentWrap .album.active .disk,.contentWrap .album2.active .disk,.contentWrap .album3.active .disk,.contentWrap .album4.active .disk,.contentWrap .album5.active .disk {
+        left: 400px;
+        transition-delay: .5s;
+        }
+
+        .contentWrap .album .coverImg,.contentWrap .album2 .coverImg,.contentWrap .album3 .coverImg,.contentWrap .album4 .coverImg,.contentWrap .album5 .coverImg {
+        position: absolute;
+        width: 450px;
+        height: 450px;
+        box-shadow: 2px 14px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contentWrap .album .coverImg img,.contentWrap .album2 .coverImg img,.contentWrap .album3 .coverImg img,.contentWrap .album4 .coverImg img,.contentWrap .album5 .coverImg img {
+        width: inherit;
+        height: inherit;
+        }
+
+        .contentWrap .album .disk,.contentWrap .album2 .disk,.contentWrap .album3 .disk,.contentWrap .album4 .disk,.contentWrap .album5 .disk {
+        position: absolute;
+        top: 4px;
+        left: 0px;
+        width: 442px;
+        height: 442px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, rgb(60, 163, 248) 50%, rgb(78, 175, 255) 50%);
+        transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: rotateAni 10s ease infinite;
+        }
+
+        .contentWrap .album .disk .disk_inner,.contentWrap .album2 .disk .disk_inner,.contentWrap .album3 .disk .disk_inner,.contentWrap .album4 .disk .disk_inner,.contentWrap .album5 .disk .disk_inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 160px;
+        height: 160px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        border: 4px dashed rgba(78, 175, 255, 10);
+        }
+
+        .contentWrap .album .disk .disk_inner::after,.contentWrap .album2 .disk .disk_inner::after,.contentWrap .album3 .disk .disk_inner::after,.contentWrap .album4 .disk .disk_inner::after,.contentWrap .album5 .disk .disk_inner::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background-color: black;
+        border-radius: 50%;
+        }
+
+        .contentWrap .album:hover .disk,.contentWrap .album2:hover .disk,.contentWrap .album3:hover .disk,.contentWrap .album4:hover .disk,.contentWrap .album5:hover .disk {
+        left: 40%;
+        transition-delay: 0s;
+        }
+
+        @keyframes rotateAni {
+        0% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        }
+        .text {
+            font-family: 'KOTRA_BOLD-Bold';
+            position: absolute;
+            font-size: 50px;
+            color: rgb(78, 175, 255);
+            opacity: 100%;
+            top: 370%;
+            left: 66%;
+        }
+
+        .text2 {
+            text-align: center;
+            position: absolute;
+            font-family: 'Pretendard';
+            font-weight: 100;
+            color: white;
+            font-size: 26px;
+            padding: 12px;
+            top: 380%;
+            left: 21%;
+        }
+        .text3 {
+            font-family: 'KOTRA_BOLD-Bold';
+            position: absolute;
+            font-size: 50px;
+            color: rgb(78, 175, 255);
+            opacity: 100%;
+            top: 420%;
+            left: 24%;
+        }
+
+        .text4 {
+            text-align: center;
+            position: absolute;
+            font-family: 'Pretendard';
+            font-weight: 100;
+            color: white;
+            font-size: 26px;
+            padding: 12px;
+            top: 430%;
+            left: -20%;
+        }
+        .text5 {
+            font-family: 'KOTRA_BOLD-Bold';
+            position: absolute;
+            font-size: 50px;
+            color: rgb(78, 175, 255);
+            opacity: 100%;
+            top: 472%;
+            left: 66%;
+        }
+
+        .text6 {
+            text-align: center;
+            position: absolute;
+            font-family: 'Pretendard';
+            font-weight: 100;
+            color: white;
+            font-size: 26px;
+            padding: 12px;
+            top: 482%;
+            left: 23%;
+        }
+        .text7 {
+            font-family: 'KOTRA_BOLD-Bold';
+            position: absolute;
+            font-size: 50px;
+            color: rgb(78, 175, 255);
+            opacity: 100%;
+            top: 524%;
+            left: 27%;
+        }
+
+        .text8 {
+            text-align: center;
+            position: absolute;
+            font-family: 'Pretendard';
+            font-weight: 100;
+            color: white;
+            font-size: 26px;
+            padding: 12px;
+            top: 534%;
+            left: -20%;
+        }
+        .text9 {
+            font-family: 'KOTRA_BOLD-Bold';
+            position: absolute;
+            font-size: 50px;
+            color: rgb(78, 175, 255);
+            opacity: 100%;
+            top: 574%;
+            left: 66%;
+        }
+
+        .text10 {
+            text-align: center;
+            position: absolute;
+            font-family: 'Pretendard';
+            font-weight: 100;
+            color: white;
+            font-size: 26px;
+            padding: 12px;
+            top: 584%;
+            left: 21%;
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-down">
+        <h2>Analog indie rock band</h2>
+        <nav>
+            <ul>
+                <li class="menu"><a href="05.html">Introduction</a></li>
+                <li class="menu"><a href="01.html">Instrument</a></li>
+                <li class="menu"><a href="02.html">Video</a></li>
+                <li class="menu"><a href="03.html">Band music</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="main2">
+            <div class="inner"></div>
+        </div>
+        <section class="logo">
+            <img id="header-front"
+            src="./img/logo.png">
+        </section>
+        <div class="image1"></div>
+            <div class="image2" width="1920px"></div>
+            <section id="wrapper">
+                <article class="cont" id="cont_2">
+                    <ul id="slider">
+                        <li><span class="object"></span></li>
+                        <li><audio id="sound" src="./audio/sound.mp3"></audio><span class="voice"></span></li>
+                        <li><span class="voicetext"></span></li>
+                        <li><audio id="sound" src="./audio/sound.mp3"></audio><span class="guiter"></span></li>
+                        <li><span class="guitertext"></span></li>
+                        <li><audio id="sound" src="./audio/sound.mp3"></audio><span class="drum"></span></li>
+                        <li><span class="drumtext"></span></li>
+                        <li><audio id="sound" src="./audio/sound.mp3"></audio><span class="Base"></span></li>
+                        <li><span class="Basetext"></span></li>
+                    </ul>
+                </article><!-- cont -->
+            </section>
+                <div class="outer-container">
+                    <div class="image-container">
+                    <video autoplay loop muted>
+                        <source src="img/video.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                
+                    <h3 class="section-title2">
+                        <span class="paralax-title">
+                            It's a night where only you and me remain in this world
+                        </span>
+                    </h3>
+                    </div>
+    </main>
+    <article class="contentWrap">
+        <section class="album active">
+            <div class="disk">
+                <div class="disk_inner"></div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=5l6Fz2bgos4" target="blank" class="coverImg">
+                <audio id="sound1"><source src="./img/chowchow.mp3" type="audio/mpeg"></audio>
+                <img src="./img/chowchow.jpg" onmouseover="ppp()" onmouseout="sss()">
+            </a>
+            </section>
+            <section class="album2 active">
+                <div class="disk">
+                    <div class="disk_inner"></div>
+                </div>
+                <a href="https://www.youtube.com/watch?v=3iHBlNgjQQo" target="blank" class="coverImg">
+                    <audio id="sound2"><source src="./img/beautifulthing.mp3" type="audio/mpeg"></audio>
+                    <img src="./img/beautifulthing.jpg" onmouseover="ppp2()" onmouseout="sss2()">
+                </a>
+                </section>
+                <section class="album3 active">
+                    <div class="disk">
+                        <div class="disk_inner"></div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=PGADim6UzHE" target="blank" class="coverImg">
+                        <audio id="sound3"><source src="./img/Antifreeze.mp3" type="audio/mpeg"></audio>
+                        <img src="./img/Antifreeze.jpg" onmouseover="ppp3()" onmouseout="sss3()">
+                    </a>
+                    </section>
+                    <section class="album4 active">
+                        <div class="disk">
+                            <div class="disk_inner"></div>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=KsznX5j2oQ0" target="blank" class="coverImg">
+                            <audio id="sound4"><source src="./img/Nanchun.mp3" type="audio/mpeg"></audio>
+                            <img src="./img/Nanchun.jpg" onmouseover="ppp4()" onmouseout="sss4()">
+                        </a>
+                        </section>
+                        <section class="album5 active">
+                            <div class="disk">
+                                <div class="disk_inner"></div>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=JaIMSzE5yLA" target="blank" class="coverImg">
+                                <audio id="sound5"><source src="./img/nopain.mp3" type="audio/mpeg"></audio>
+                                <img src="./img/nopain.jpg" onmouseover="ppp5()" onmouseout="sss5()">
+                            </a>
+                            </section>
+        </article>
+        </div>
+            <div class="text">차우차우</div>
+            <div class="text2">델리스파이스</div>
+            <div class="text3">아름다운것</div>
+            <div class="text4">언니네이발관</div>
+            <div class="text5">Antifreeze</div>
+            <div class="text6">검정치마</div>
+            <div class="text7">난춘</div>
+            <div class="text8">새소년</div>
+            <div class="text9">Nopain</div>
+            <div class="text10">실리카겔</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/img.js"></script>
+    <script src="./js/main_scroll.js" defer></script>
+    <!-- <script src="./js/mouse.js"></script> -->
+    <!-- <script src="./js/sky.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function ppp(){document.getElementById("sound1").play();}
+        function sss(){document.getElementById("sound1").pause();}
+        function ppp2(){document.getElementById("sound2").play();}
+        function sss2(){document.getElementById("sound2").pause();}
+        function ppp3(){document.getElementById("sound3").play();}
+        function sss3(){document.getElementById("sound3").pause();}
+        function ppp4(){document.getElementById("sound4").play();}
+        function sss4(){document.getElementById("sound4").pause();}
+        function ppp5(){document.getElementById("sound5").play();}
+        function sss5(){document.getElementById("sound5").pause();}
+    </script>
+    <script>
+var prev_button, next_button;
+var contentWrap;
+var disk_inner;
+var pageNum = 0;
+var totalNum = 0;
+var album;
+var pointBtnAll;
+var bgArray = new Array();
+bgArray[0] = ["#0272a4","#f6a564"];
+bgArray[1] = ["#b6bfc8","#36595b"];
+bgArray[2] = ["#e58e82","#6f569f"];
+
+window.onload = function(){
+    prev_button = document.querySelectorAll("button")[0];
+    next_button = document.querySelectorAll("button")[1];
+    
+    contentWrap = document.querySelector(".contentWrap");
+    disk_inner = document.querySelectorAll(".disk_inner");
+    album = document.querySelectorAll(".album");
+    totalNum = album.length;
+    // alert(totalNum)
+
+    prev_button.addEventListener("click", function(){
+        if(pageNum > 0){
+            pageNum --;
+        }else{
+            pageNum = totalNum -1;
+        }
+        pageChangeFunc();
+    })
+
+    next_button.addEventListener("click", function(){
+        if(pageNum < totalNum-1){
+            pageNum ++;
+        }else{
+            pageNum = 0;
+        }
+        pageChangeFunc();
+    })
+
+    //최초실행
+    // pageNum = 2;
+    pageChangeFunc();
+}
+
+//여기서 모든 것을 한다.
+function pageChangeFunc(){
+
+    // console.log(bgArray[pageNum][1])
+    contentWrap.style.background = "linear-gradient(120deg,"+ bgArray[pageNum][0] +", "+ bgArray[pageNum][1] + ")";
+
+    for(var i=0; i<totalNum; i++){
+        if(pageNum == i){
+            //현재 컨텐츠(페이지)
+            album[i].classList.add("active");
+        }else{
+            album[i].classList.remove("active");
+        }
+    }
+    // album[pageNum].classList.add("active");
+
+    disk_inner[pageNum].style.background = bgArray[pageNum][0];
+}
+
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            var windowHeight = $(window).height(); // 윈도우 높이 할당
+            var isElementVisible = []; // isElementVisible 배열 초기화
+
+            $('.text').each(function (i) {
+                isElementVisible[i] = false; // 배열 요소 초기값 설정
+            });
+
+            $(window).scroll(function () {
+                var scrollTop = $(this).scrollTop(); // 스크롤의 현재 위치
+
+                $('.text').each(function (i) {
+                    var top_of_object = $(this).offset().top; // 요소의 상단 위치
+                    var bottom_of_object = top_of_object + $(this).outerHeight(); // 요소의 하단 위치
+
+                    var bottom_of_window = scrollTop + windowHeight; // 윈도우의 하단 위치
+
+                    if (!isElementVisible[i] && bottom_of_window > top_of_object + (bottom_of_object - top_of_object) / 2) {
+                        $(this).stop().animate({ 'opacity': '1' }, 1500);
+                        isElementVisible[i] = true;
+                    } else if (isElementVisible[i] && bottom_of_window <= top_of_object + (bottom_of_object - top_of_object) / 2) {
+                        $(this).stop().animate({ 'opacity': '0' }, 100);
+                        isElementVisible[i] = false;
+                    }
+                });
+            });
+        });
+    </script>
+        <script>
+            $(document).ready(function () {
+                var windowHeight = $(window).height(); // 윈도우 높이 할당
+                var isElementVisible = []; // isElementVisible 배열 초기화
+    
+                $('.text3').each(function (i) {
+                    isElementVisible[i] = false; // 배열 요소 초기값 설정
+                });
+    
+                $(window).scroll(function () {
+                    var scrollTop = $(this).scrollTop(); // 스크롤의 현재 위치
+    
+                    $('.text3').each(function (i) {
+                        var top_of_object = $(this).offset().top; // 요소의 상단 위치
+                        var bottom_of_object = top_of_object + $(this).outerHeight(); // 요소의 하단 위치
+    
+                        var bottom_of_window = scrollTop + windowHeight; // 윈도우의 하단 위치
+    
+                        if (!isElementVisible[i] && bottom_of_window > top_of_object + (bottom_of_object - top_of_object) / 2) {
+                            $(this).stop().animate({ 'opacity': '1' }, 1500);
+                            isElementVisible[i] = true;
+                        } else if (isElementVisible[i] && bottom_of_window <= top_of_object + (bottom_of_object - top_of_object) / 2) {
+                            $(this).stop().animate({ 'opacity': '0' }, 100);
+                            isElementVisible[i] = false;
+                        }
+                    });
+                });
+            });
+        </script>
+                <script>
+                    $(document).ready(function () {
+                        var windowHeight = $(window).height(); // 윈도우 높이 할당
+                        var isElementVisible = []; // isElementVisible 배열 초기화
+            
+                        $('.text5').each(function (i) {
+                            isElementVisible[i] = false; // 배열 요소 초기값 설정
+                        });
+            
+                        $(window).scroll(function () {
+                            var scrollTop = $(this).scrollTop(); // 스크롤의 현재 위치
+            
+                            $('.text5').each(function (i) {
+                                var top_of_object = $(this).offset().top; // 요소의 상단 위치
+                                var bottom_of_object = top_of_object + $(this).outerHeight(); // 요소의 하단 위치
+            
+                                var bottom_of_window = scrollTop + windowHeight; // 윈도우의 하단 위치
+            
+                                if (!isElementVisible[i] && bottom_of_window > top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                    $(this).stop().animate({ 'opacity': '1' }, 1500);
+                                    isElementVisible[i] = true;
+                                } else if (isElementVisible[i] && bottom_of_window <= top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                    $(this).stop().animate({ 'opacity': '0' }, 100);
+                                    isElementVisible[i] = false;
+                                }
+                            });
+                        });
+                    });
+                </script>
+                        <script>
+                            $(document).ready(function () {
+                                var windowHeight = $(window).height(); // 윈도우 높이 할당
+                                var isElementVisible = []; // isElementVisible 배열 초기화
+                    
+                                $('.text7').each(function (i) {
+                                    isElementVisible[i] = false; // 배열 요소 초기값 설정
+                                });
+                    
+                                $(window).scroll(function () {
+                                    var scrollTop = $(this).scrollTop(); // 스크롤의 현재 위치
+                    
+                                    $('.text7').each(function (i) {
+                                        var top_of_object = $(this).offset().top; // 요소의 상단 위치
+                                        var bottom_of_object = top_of_object + $(this).outerHeight(); // 요소의 하단 위치
+                    
+                                        var bottom_of_window = scrollTop + windowHeight; // 윈도우의 하단 위치
+                    
+                                        if (!isElementVisible[i] && bottom_of_window > top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                            $(this).stop().animate({ 'opacity': '1' }, 1500);
+                                            isElementVisible[i] = true;
+                                        } else if (isElementVisible[i] && bottom_of_window <= top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                            $(this).stop().animate({ 'opacity': '0' }, 100);
+                                            isElementVisible[i] = false;
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+                                <script>
+                                    $(document).ready(function () {
+                                        var windowHeight = $(window).height(); // 윈도우 높이 할당
+                                        var isElementVisible = []; // isElementVisible 배열 초기화
+                            
+                                        $('.text9').each(function (i) {
+                                            isElementVisible[i] = false; // 배열 요소 초기값 설정
+                                        });
+                            
+                                        $(window).scroll(function () {
+                                            var scrollTop = $(this).scrollTop(); // 스크롤의 현재 위치
+                            
+                                            $('.text9').each(function (i) {
+                                                var top_of_object = $(this).offset().top; // 요소의 상단 위치
+                                                var bottom_of_object = top_of_object + $(this).outerHeight(); // 요소의 하단 위치
+                            
+                                                var bottom_of_window = scrollTop + windowHeight; // 윈도우의 하단 위치
+                            
+                                                if (!isElementVisible[i] && bottom_of_window > top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                                    $(this).stop().animate({ 'opacity': '1' }, 1500);
+                                                    isElementVisible[i] = true;
+                                                } else if (isElementVisible[i] && bottom_of_window <= top_of_object + (bottom_of_object - top_of_object) / 2) {
+                                                    $(this).stop().animate({ 'opacity': '0' }, 100);
+                                                    isElementVisible[i] = false;
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script>
+        const inner = document.querySelector(".inner");
+        const section = document.querySelector("section");
+
+        window.onscroll = function () {
+            let value = window.pageYOffset / section.offsetTop + 1;
+            inner.style.transform = `scale(${value})`;
+        };
+
+
+        $(function () {
+
+            var $window = $(window);    //Window object
+
+            var scrollTime = 1.2;     //Scroll time
+            var scrollDistance = 170;   //Distance. Use smaller value for shorter scroll and greater value for longer scroll
+
+            $window.on("mousewheel DOMMouseScroll", function (event) {
+
+                event.preventDefault();
+
+                var delta = event.originalEvent.wheelDelta / 120 || -event.originalEvent.detail / 3;
+                var scrollTop = $window.scrollTop();
+                var finalScroll = scrollTop - parseInt(delta * scrollDistance);
+
+                TweenMax.to($window, scrollTime, {
+                    scrollTo: { y: finalScroll, autoKill: true },
+                    ease: Power1.easeOut, //For more easing functions see https://api.greensock.com/js/com/greensock/easing/package-detail.html
+                    autoKill: true,
+                    overwrite: 5
+                });
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
